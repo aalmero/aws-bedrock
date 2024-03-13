@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    image: ankane/pgvector
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PW}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"  # Map container's 5432 to host's 5432
+    restart: always  
+
+  admin_portal:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
+    ports:
+      - "1414:80"  # Map container's 80 to host's 1414
+    restart: always  
+
+# Add any other configuration or services you may need
+
